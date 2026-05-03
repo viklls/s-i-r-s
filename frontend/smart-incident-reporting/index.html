@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Incident Reporting System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="shell">
+  <div class="page-card">
+
+    <div class="landing-center">
+      <div class="landing-tag">Платформа для громадян</div>
+      <h1 class="landing-hero-title">Smart Incident<br>Reporting System</h1>
+      <p class="landing-description">
+        Сучасна веб-платформа для швидкого повідомлення про проблеми в місті та
+        ефективної взаємодії між громадянами і міськими службами. Система дозволяє
+        мешканцям легко повідомляти про інциденти, такі як пошкоджені дороги,
+        несправне освітлення, сміття, аварії інфраструктури чи інші міські проблеми.
+      </p>
+      <a class="btn-login" href="login.html">LOGIN →</a>
+    </div>
+
+    <h2 class="features-heading">Основні можливості<br>системи</h2>
+    <div class="features-grid">
+      <div class="feature-card"><h3>Швидке створення</h3><p>Повідомте про проблему за кілька кроків</p></div>
+      <div class="feature-card"><h3>Геолокація</h3><p>Додайте точне місце інциденту</p></div>
+      <div class="feature-card"><h3>Відстеження статусу</h3><p>Слідкуйте за зміною статусу завки в реальному часі</p></div>
+      <div class="feature-card"><h3>Прозорий процес</h3><p>Кожне звернення є відкритим і доступним для всіх громадян, щоб кожен мав можливість переконатися в ефективності нашої роботи</p></div>
+      <div class="feature-card"><h3>Аналітика</h3><p>Статистика та аналітика міських проблем для кращого планування</p></div>
+      <div class="feature-card"><h3>Залучення громади</h3><p>Допомагайте розвивати міську інфраструктуру разом з іншими мешканцями</p></div>
+    </div>
+    <div class="landing-center">
+      <a class="btn-start" href="login.html">Розпочати зараз →</a>
+    </div>
+    <p class="landing-footer">Smart Incident Reporting</p>
+
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script>
+  // Якщо вже залогінений — одразу на dashboard
+  if (isLoggedIn()) window.location.href = 'dashboard.html';
+</script>
+</body>
+</html>

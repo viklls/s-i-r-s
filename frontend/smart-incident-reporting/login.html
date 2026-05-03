@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вхід — Smart Incident Reporting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-switch {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: .95rem;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 16px;
+    }
+    .auth-switch button {
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: .95rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+    .error-msg {
+      font-family: var(--font-ui);
+      font-size: .75rem;
+      color: #b33;
+      padding: 8px 12px;
+      border: 1px solid #e0b0b0;
+      background: #fdf0f0;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .hint-box {
+      font-family: var(--font-ui);
+      font-size: .7rem;
+      color: var(--text-muted);
+      border: 1px dashed var(--border-dashed);
+      padding: 10px 14px;
+      margin-top: 24px;
+      line-height: 1.8;
+    }
+    .hint-box strong { color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="page-card" style="min-height:auto;">
+
+    <h1 class="site-title">Smart Incident Reporting</h1>
+    <p class="page-label">Авторизація</p>
+    <hr class="header-divider">
+
+    <div id="auth-error" class="error-msg"></div>
+
+    <!-- LOGIN FORM -->
+    <div id="login-form">
+      <div class="fieldset-box">
+        <span class="fieldset-legend">Вхід</span>
+
+        <div class="field-group">
+          <label class="field-label" for="login-email">Email</label>
+          <input class="field-input" id="login-email" type="email" placeholder="your@email.com">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="login-password">Пароль</label>
+          <input class="field-input" id="login-password" type="password" placeholder="">
+        </div>
+
+        <button class="btn-primary" id="login-btn">LOGIN →</button>
+      </div>
+
+      <p class="auth-switch">
+        Ще немає акаунту?
+        <button id="show-register">Зареєструватися</button>
+      </p>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="register-form" style="display:none;">
+      <div class="fieldset-box">
+        <span class="fieldset-legend">Реєстрація</span>
+
+        <div class="fields-row">
+          <div style="flex:1;">
+            <label class="field-label" for="reg-first">Ім'я</label>
+            <input class="field-input" id="reg-first" type="text">
+          </div>
+          <div style="flex:1;">
+            <label class="field-label" for="reg-last">Прізвище</label>
+            <input class="field-input" id="reg-last" type="text">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="reg-email">Email</label>
+          <input class="field-input" id="reg-email" type="email" placeholder="your@email.com">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="reg-password">Пароль</label>
+          <input class="field-input" id="reg-password" type="password" placeholder="мін. 8 символів">
+        </div>
+
+        <button class="btn-primary" id="register-btn">Зареєструватися</button>
+      </div>
+
+      <p class="auth-switch">
+        Вже є акаунт?
+        <button id="show-login">Увійти</button>
+      </p>
+    </div>
+
+    <!-- Тестові акаунти -->
+    <div class="hint-box">
+      <strong>Тестові акаунти:</strong><br>
+      Admin: admin@incident.local / Admin123!<br>
+      User: &nbsp;user@incident.local / User123!
+    </div>
+
+  </div>
+</div>
+<script src="js/app.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
