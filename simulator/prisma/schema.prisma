@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]
+}
+
+model User {
+  id           String            @id @default(uuid())
+  email        String            @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  roleId       Int
+  createdAt    DateTime          @default(now())
+  role         Role              @relation(fields: [roleId], references: [id])
+  admin        Admin?
+  incidents    Incident[]
+  comments     IncidentComment[]
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Priority {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  categories Category[]
+}
+
+model Category {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  priorityId Int
+  priority   Priority   @relation(fields: [priorityId], references: [id])
+  incidents  Incident[]
+}
+
+model Status {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  incidents Incident[]
+}
+
+// === НОВЕ: IoT-пристрій ===
+model Device {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  type        String     // напр. "water_leak", "smoke", "power_grid"
+  location    String
+  apiKey      String     @unique
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  lastSeenAt  DateTime?
+  incidents   Incident[]
+}
+
+model Incident {
+  id            Int               @id @default(autoincrement())
+  title         String
+  description   String
+  location      String
+  categoryId    Int
+  statusId      Int
+  authorId      String
+  deviceId      Int?              // NEW: якщо створено IoT-пристроєм
+  createdAt     DateTime          @default(now())
+  lastUpdatedAt DateTime          @default(now())
+  category      Category          @relation(fields: [categoryId], references: [id])
+  status        Status            @relation(fields: [statusId], references: [id])
+  author        User              @relation(fields: [authorId], references: [id])
+  device        Device?           @relation(fields: [deviceId], references: [id])
+  comments      IncidentComment[]
+  photos        IncidentPhoto[]
+}
+
+model IncidentComment {
+  id         Int      @id @default(autoincrement())
+  incidentId Int
+  authorId   String
+  content    String
+  createdAt  DateTime @default(now())
+  incident   Incident @relation(fields: [incidentId], references: [id])
+  author     User     @relation(fields: [authorId], references: [id])
+}
+
+model IncidentPhoto {
+  id         Int      @id @default(autoincrement())
+  incidentId Int
+  fileUrl    String
+  uploadedAt DateTime @default(now())
+  incident   Incident @relation(fields: [incidentId], references: [id])
+}
