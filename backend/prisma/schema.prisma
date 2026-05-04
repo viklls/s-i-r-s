@@ -83,7 +83,6 @@ model Incident {
   author        User              @relation(fields: [authorId], references: [id])
   device        Device?           @relation(fields: [deviceId], references: [id])
   comments      IncidentComment[]
-  photos        IncidentPhoto[]
 }
 
 model IncidentComment {
@@ -94,12 +93,4 @@ model IncidentComment {
   createdAt  DateTime @default(now())
   incident   Incident @relation(fields: [incidentId], references: [id])
   author     User     @relation(fields: [authorId], references: [id])
-}
-
-model IncidentPhoto {
-  id         Int      @id @default(autoincrement())
-  incidentId Int
-  fileUrl    String
-  uploadedAt DateTime @default(now())
-  incident   Incident @relation(fields: [incidentId], references: [id])
 }

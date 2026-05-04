@@ -11,13 +11,12 @@ const {
 
 const create = async (req, res) => {
   try {
-    const { title, description, category, address, photo } = req.body;
+    const { title, description, category, address } = req.body;
     const incident = await createIncident({
       title,
       description,
       categoryName: category,
       address,
-      photoUrl: photo,
       authorId: req.user.sub,
       authorRole: req.user.role
     });

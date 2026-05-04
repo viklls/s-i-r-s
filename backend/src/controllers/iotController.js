@@ -1,18 +1,5 @@
 const { getDeviceByApiKey, createIotIncident, listDevices } = require('../services/iotService');
 
-/**
- * POST /iot/incidents
- *
- * Headers:
- *   X-Device-Api-Key: <key>
- *
- * Body:
- *   {
- *     "title": "Water leak detected",
- *     "description": "Sensor triggered, water on floor",
- *     "sensorReading": "moisture: 87%"   // optional
- *   }
- */
 const reportIncident = async (req, res) => {
   try {
     const apiKey = req.headers['x-device-api-key'];
@@ -50,10 +37,6 @@ const reportIncident = async (req, res) => {
   }
 };
 
-/**
- * GET /iot/devices
- * Доступний усім авторизованим (без apiKey, для дашборду в UI пізніше)
- */
 const getDevices = async (req, res) => {
   try {
     const devices = await listDevices();

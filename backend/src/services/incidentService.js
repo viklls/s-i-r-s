@@ -24,12 +24,6 @@ const createIncident = async ({ title, description, categoryName, address, photo
     }
   });
 
-  if (photoUrl) {
-    await prisma.incidentPhoto.create({
-      data: { incidentId: incident.id, fileUrl: photoUrl }
-    });
-  }
-
   return getIncidentById(incident.id);
 };
 
@@ -66,7 +60,6 @@ const getIncidentById = async (id) => {
     include: {
       category: { select: { name: true } },
       status: { select: { name: true } },
-      photos: { select: { fileUrl: true, uploadedAt: true } },
       device: { select: { id: true, name: true, type: true, location: true, lastSeenAt: true } },
       comments: {
         orderBy: { createdAt: 'asc' },
@@ -189,7 +182,6 @@ const deleteIncident = async (incidentId) => {
   }
 
   await prisma.incidentComment.deleteMany({ where: { incidentId: Number(incidentId) } });
-  await prisma.incidentPhoto.deleteMany({ where: { incidentId: Number(incidentId) } });
   await prisma.incident.delete({ where: { id: Number(incidentId) } });
 
   return { id: Number(incidentId), deleted: true };

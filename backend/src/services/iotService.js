@@ -3,7 +3,6 @@ const { IncidentStatus } = require('../constants/incidentStatus');
 
 const IOT_USER_EMAIL = 'iot-system@incident.local';
 
-// Мапа: тип сенсора → назва категорії інциденту
 const SENSOR_CATEGORY_MAP = {
   water_leak:   'Water Leak',
   smoke:        'Fire Alarm Issue',
@@ -45,7 +44,6 @@ const createIotIncident = async ({ device, title, description, sensorReading }) 
     throw new Error('IoT system user not found. Run seed-iot.js first.');
   }
 
-  // Описуємо інцидент детально, додаємо показники датчика
   const fullDescription = sensorReading
     ? `${description}\n\n— Sensor reading: ${sensorReading}\n— Device: ${device.name} (${device.type})\n— Reported automatically by IoT.`
     : `${description}\n\n— Device: ${device.name} (${device.type})\n— Reported automatically by IoT.`;
@@ -67,7 +65,6 @@ const createIotIncident = async ({ device, title, description, sensorReading }) 
     }
   });
 
-  // Оновлюємо lastSeenAt у девайса
   await prisma.device.update({
     where: { id: device.id },
     data: { lastSeenAt: new Date() }
@@ -87,7 +84,6 @@ const listDevices = async () => {
       isActive: true,
       lastSeenAt: true,
       createdAt: true
-      // apiKey НЕ повертаємо в загальному списку
     }
   });
 };
